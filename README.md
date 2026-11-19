@@ -58,7 +58,7 @@ Stop the host apps first.
 docker compose up --build
 ```
 
-The web image is built with `NEXT_PUBLIC_GRAPHQL_API_BASE_URI=http://localhost:4100/graphql`. GraphQL applies migrations before it listens.
+The web image is built with `NEXT_PUBLIC_GRAPHQL_API_BASE_URI=http://localhost:4100/graphql`, which the browser uses. The web container reads the notes list from `GRAPHQL_API_INTERNAL_URI=http://graphql:4100/graphql`, because `localhost` inside that container is the web app itself. GraphQL applies migrations before it listens.
 
 ## Where code goes
 
