@@ -8,5 +8,5 @@
       "@repo/ui/hooks/*": ["./src/hooks/*"]
     }
   },
-  "include": ["src"]
+  "include": ["src", ".storybook", "vite.config.ts"]
 }

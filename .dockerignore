@@ -9,5 +9,7 @@ dist
 **/.env.local
 playwright-report
 test-results
+storybook-static
+storybook.log
 coverage
 *.tsbuildinfo

@@ -10,5 +10,7 @@ coverage
 packages/db/src/generated
 playwright-report
 test-results
+storybook-static
+storybook.log
 blob-report
 playwright/.cache

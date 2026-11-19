@@ -50,6 +50,9 @@ jobs:
           git diff --exit-code
           test -z "$(git status --porcelain)"
 
+      - name: Build Storybook
+        run: bun run build-storybook
+
   e2e:
     name: Playwright
     runs-on: ubuntu-latest

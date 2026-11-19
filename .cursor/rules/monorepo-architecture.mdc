@@ -9,7 +9,7 @@ Shared packages stay free of Next, the DOM, and Prisma. Apps wire those in.
 
 ## Apps
 
-- `apps/web-app` — Next.js screen. Talks to GraphQL from the browser.
+- `apps/web-app` — Next.js screen. Reads GraphQL on the server. Client leaves handle interaction.
 - `apps/graphql` — GraphQL Yoga. The only app that writes notes.
 - `apps/webhooks` — Hono. Health and the example webhook. It does not import `@repo/db`.
 
@@ -22,7 +22,7 @@ Shared packages stay free of Next, the DOM, and Prisma. Apps wire those in.
 - `@repo/types` — cross-app types that are not generated from GraphQL.
 - `@repo/platform` — adapter interfaces and `usePlatform`. Web implements them.
 - `@repo/api` — GraphQL operations, the fetcher, and generated hooks.
-- `@repo/data` — view-model hooks. Pages do not call React Query themselves.
+- `@repo/data` — view-model hooks for client interaction. Pages do not call React Query themselves.
 - `@repo/db` — Prisma. GraphQL is the only app that imports it.
 - `@repo/logging` — pino, no worker transport. The web app does not import it.
 

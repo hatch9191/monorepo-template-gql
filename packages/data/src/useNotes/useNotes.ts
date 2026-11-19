@@ -1,7 +1,6 @@
 "use client";
 
-import { useCreateNoteMutation, useListNotesQuery } from "@repo/api";
-import { useQueryClient } from "@tanstack/react-query";
+import { useCreateNoteMutation } from "@repo/api";
 import { useState } from "react";
 
 export type NoteFormValues = {
@@ -10,30 +9,21 @@ export type NoteFormValues = {
 };
 
 export function useNotes() {
-  const queryClient = useQueryClient();
-  const list = useListNotesQuery(undefined, {
-    retry: false,
-  });
   const [createError, setCreateError] = useState<string | null>(null);
   const createNoteMutation = useCreateNoteMutation({
-    onSuccess: async () => {
+    onSuccess: () => {
       setCreateError(null);
-      await queryClient.invalidateQueries({
-        queryKey: useListNotesQuery.getKey(),
-      });
     },
     onError: (error: Error) => {
       setCreateError(error.message);
     },
   });
 
-  const createNote = (values: NoteFormValues) => {
-    createNoteMutation.mutate({ input: values });
+  const createNote = async (values: NoteFormValues) => {
+    await createNoteMutation.mutateAsync({ input: values });
   };
 
   return {
-    notes: list.data?.notes ?? [],
-    status: list.isPending ? "loading" : list.isError ? "error" : "ready",
     createError,
     createNote,
     isCreating: createNoteMutation.isPending,

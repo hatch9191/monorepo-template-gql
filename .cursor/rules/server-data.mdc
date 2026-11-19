@@ -1,0 +1,14 @@
+---
+description: Fetch reads on the server and push the client boundary down
+alwaysApply: true
+---
+
+# Server data
+
+Fetch reads in `apps/web-app` on the server and pass them down as props. Wrap the read in React `cache` and call it from both `generateMetadata` and the page, so the document title and the screen share one request.
+
+Push `"use client"` to the lowest component that needs state, effects, or event handlers. Parents stay Server Components.
+
+The notes list is a server read. The create form is the client leaf: it owns the fields and calls a view-model hook from `@repo/data`. Do not hoist `"use client"` onto the page or the page template to load the list.
+
+HTTP stays on axios through `@repo/api`.

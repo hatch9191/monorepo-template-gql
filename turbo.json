@@ -43,6 +43,13 @@
       "cache": false,
       "outputs": ["src/theme/theme.css"]
     },
+    "storybook": {
+      "cache": false,
+      "persistent": true
+    },
+    "build-storybook": {
+      "outputs": ["storybook-static/**"]
+    },
     "//#lint": {}
   }
 }

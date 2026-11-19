@@ -1,6 +1,6 @@
 "use client";
 
-import { type ReactNode, Suspense } from "react";
+import type { ReactNode } from "react";
 
 import { PlatformProvider } from "@/providers/PlatformProvider/PlatformProvider";
 import { QueryProvider } from "@/providers/QueryProvider/QueryProvider";
@@ -12,9 +12,7 @@ type ProvidersProps = {
 export function Providers({ children }: ProvidersProps) {
   return (
     <QueryProvider>
-      <Suspense>
-        <PlatformProvider>{children}</PlatformProvider>
-      </Suspense>
+      <PlatformProvider>{children}</PlatformProvider>
     </QueryProvider>
   );
 }

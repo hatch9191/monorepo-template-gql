@@ -1,53 +1,74 @@
 "use client";
 
 import {
-  PlatformProvider as BasePlatformProvider,
-  type Platform,
+  type AnalyticsAdapter,
+  type AuthAdapter,
+  type KeyValueStore,
+  PlatformLocationProvider,
+  type PlatformServices,
+  PlatformServicesProvider,
+  type RouterAdapter,
 } from "@repo/platform";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { type ReactNode, useMemo } from "react";
+import { useRouter } from "next/navigation";
+import { type ReactNode, Suspense, useMemo } from "react";
+
+import { PlatformLocationBridge } from "./PlatformLocationBridge";
+
+const auth: AuthAdapter = {
+  getToken: async () => null,
+  signOut: async () => {},
+};
+
+const storage: KeyValueStore = {
+  get: async (key) => window.localStorage.getItem(key),
+  set: async (key, value) => {
+    window.localStorage.setItem(key, value);
+  },
+  remove: async (key) => {
+    window.localStorage.removeItem(key);
+  },
+};
+
+const analytics: AnalyticsAdapter = {
+  track: () => {},
+  identify: () => {},
+};
 
 type PlatformProviderProps = {
   children: ReactNode;
 };
 
 export function PlatformProvider({ children }: PlatformProviderProps) {
-  const pathname = usePathname();
-  const searchParams = useSearchParams();
   const router = useRouter();
-  const platform = useMemo<Platform>(() => {
-    return {
-      auth: {
-        getToken: async () => null,
-        signOut: async () => {},
+  const services = useMemo<PlatformServices>(() => {
+    const platformRouter: RouterAdapter = {
+      push: (path) => {
+        router.push(path);
       },
-      storage: {
-        get: async (key) => window.localStorage.getItem(key),
-        set: async (key, value) => {
-          window.localStorage.setItem(key, value);
-        },
-        remove: async (key) => {
-          window.localStorage.removeItem(key);
-        },
+      replace: (path) => {
+        router.replace(path);
       },
-      analytics: {
-        track: () => {},
-        identify: () => {},
-      },
-      router: {
-        pathname,
-        searchParams: new URLSearchParams(searchParams.toString()),
-        push: (path) => {
-          router.push(path);
-        },
-        replace: (path) => {
-          router.replace(path);
-        },
+      refresh: () => {
+        router.refresh();
       },
     };
-  }, [pathname, router, searchParams]);
+
+    return {
+      auth,
+      storage,
+      analytics,
+      router: platformRouter,
+    };
+  }, [router]);
 
   return (
-    <BasePlatformProvider platform={platform}>{children}</BasePlatformProvider>
+    <PlatformServicesProvider services={services}>
+      <PlatformLocationProvider>
+        <Suspense fallback={null}>
+          <PlatformLocationBridge />
+        </Suspense>
+        {children}
+      </PlatformLocationProvider>
+    </PlatformServicesProvider>
   );
 }

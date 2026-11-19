@@ -1,5 +1,5 @@
 {
-  "name": "template",
+  "name": "monorepo-template-gql",
   "private": true,
   "scripts": {
     "build": "turbo run build",
@@ -14,6 +14,8 @@
     "check-types": "turbo run check-types",
     "codegen": "turbo run codegen",
     "theme:generate": "turbo run theme:generate --filter=@repo/ui",
+    "storybook": "turbo run storybook",
+    "build-storybook": "turbo run build-storybook",
     "prepare": "husky"
   },
   "devDependencies": {

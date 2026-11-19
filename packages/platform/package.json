@@ -8,7 +8,8 @@
   },
   "scripts": {
     "check-types": "tsc --noEmit",
-    "lint": "biome check src"
+    "lint": "biome check src",
+    "test:unit": "bun test src"
   },
   "peerDependencies": {
     "react": "^19.0.0"

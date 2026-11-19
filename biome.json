@@ -17,7 +17,8 @@
       "!**/apps/graphql/src/generated",
       "!**/packages/api/src/generated",
       "!**/packages/db/src/generated",
-      "!**/packages/ui/src/theme/theme.css"
+      "!**/packages/ui/src/theme/theme.css",
+      "!**/storybook-static"
     ]
   },
   "formatter": {

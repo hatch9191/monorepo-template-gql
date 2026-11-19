@@ -11,6 +11,14 @@ Use `Show` for optional UI and `ListRenderer` for lists. Pass `keyOverride`.
 
 Route strings live in `PATHS` under `apps/web-app/src/constants/paths.ts`.
 
-Page templates render. `useNotes` and later view-model hooks live in `@repo/data`.
+App components live under `apps/web-app/src/components` in atomic folders. `@repo/ui` uses the same folders under `packages/ui/src/components`. Keep an empty folder with a `.gitkeep`.
 
-shadcn components live in `@repo/ui`. Add them with the shadcn CLI from `apps/web-app` so the `ui` alias writes into the package. If a file lands in the app, move it.
+- `atoms` — a single primitive, such as `button`, `Show`, and `ListRenderer`. The app folder stays empty while those primitives live in `@repo/ui`.
+- `molecules` — a presentational group of primitives, such as `field` and `CreateNoteFields`
+- `organisms` — a section that owns state or events, such as `CreateNoteForm`. The UI package folder stays empty until a shared section needs it.
+- `templates` — a page layout that renders server props, such as `NotesPageTemplate`. The UI package folder stays empty until a shared layout needs it.
+- `pages` — a screen assembled from a template. The Next.js route stays in `app`, so both page folders stay empty.
+
+Page templates render props from the server. `"use client"` starts at the leaf that needs state or events. `useNotes` and later view-model hooks live in `@repo/data` and cover that interaction.
+
+shadcn components live in `@repo/ui`. Add them with the shadcn CLI from `apps/web-app`. The `ui` alias writes into `@repo/ui/components/atoms`. If a file lands in the app, move it. Move a component that composes other primitives, such as `field`, into `molecules`.

@@ -1,3 +1,3 @@
-export { ListRenderer } from "./components/ListRenderer/ListRenderer";
-export { Show } from "./components/Show/Show";
+export { ListRenderer } from "./components/atoms/ListRenderer/ListRenderer";
+export { Show } from "./components/atoms/Show/Show";
 export { cn } from "./lib/utils";

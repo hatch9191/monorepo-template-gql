@@ -1,26 +1,27 @@
-"use client";
-
-import { useNotes } from "@repo/data";
 import { ListRenderer, Show } from "@repo/ui";
-import { Button } from "@repo/ui/components/ui/button";
-import { Field, FieldGroup, FieldLabel } from "@repo/ui/components/ui/field";
-import { Input } from "@repo/ui/components/ui/input";
-import { type FormEvent, useState } from "react";
+import type { ReactNode } from "react";
 
-import { PATHS } from "@/constants/paths";
+import { CreateNoteForm } from "@/components/organisms/CreateNoteForm/CreateNoteForm";
 
-export function NotesPageTemplate() {
-  const { notes, status, createError, createNote, isCreating } = useNotes();
-  const [title, setTitle] = useState("");
-  const [body, setBody] = useState("");
+export type NotesPageNote = {
+  id: string;
+  title: string;
+  body: string;
+};
 
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    createNote({ title, body });
-    setTitle("");
-    setBody("");
-  };
+export type NotesPageStatus = "ready" | "error";
 
+export type NotesPageTemplateProps = {
+  notes: readonly NotesPageNote[];
+  status: NotesPageStatus;
+  form?: ReactNode;
+};
+
+export function NotesPageTemplate({
+  notes,
+  status,
+  form = <CreateNoteForm />,
+}: NotesPageTemplateProps) {
   return (
     <main className="mx-auto flex w-full max-w-xl flex-col gap-8 px-6 py-12">
       <div className="flex flex-col gap-2">
@@ -29,42 +30,7 @@ export function NotesPageTemplate() {
           Write a note and it stays in the list.
         </p>
       </div>
-      <form
-        className="flex flex-col gap-4"
-        onSubmit={handleSubmit}
-        action={PATHS.HOME}
-      >
-        <FieldGroup>
-          <Field>
-            <FieldLabel htmlFor="title">Title</FieldLabel>
-            <Input
-              id="title"
-              name="title"
-              value={title}
-              onChange={(event) => {
-                setTitle(event.target.value);
-              }}
-            />
-          </Field>
-          <Field>
-            <FieldLabel htmlFor="body">Body</FieldLabel>
-            <Input
-              id="body"
-              name="body"
-              value={body}
-              onChange={(event) => {
-                setBody(event.target.value);
-              }}
-            />
-          </Field>
-        </FieldGroup>
-        <Button type="submit" disabled={isCreating}>
-          Create
-        </Button>
-        <Show when={createError}>
-          {(message) => <p className="text-sm text-destructive">{message}</p>}
-        </Show>
-      </form>
+      {form}
       <Show when={status === "error"}>
         {() => (
           <p className="text-sm text-muted-foreground">

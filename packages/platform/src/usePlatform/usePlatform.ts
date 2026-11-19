@@ -1,16 +1,20 @@
 "use client";
 
-import { useContext } from "react";
+import { useMemo } from "react";
 
-import { PlatformContext } from "../PlatformProvider/PlatformProvider";
 import type { Platform } from "../types";
+import { usePlatformLocation } from "../usePlatformLocation/usePlatformLocation";
+import { usePlatformServices } from "../usePlatformServices/usePlatformServices";
 
 export function usePlatform(): Platform {
-  const platform = useContext(PlatformContext);
+  const services = usePlatformServices();
+  const location = usePlatformLocation();
 
-  if (!platform) {
-    throw new Error("usePlatform must be used within a PlatformProvider");
-  }
-
-  return platform;
+  return useMemo(
+    () => ({
+      ...services,
+      location,
+    }),
+    [location, services],
+  );
 }

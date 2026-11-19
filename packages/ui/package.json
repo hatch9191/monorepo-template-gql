@@ -13,9 +13,11 @@
   },
   "scripts": {
     "check-types": "tsc --noEmit",
-    "lint": "biome check src",
+    "lint": "biome check src .storybook vite.config.ts",
     "test:unit": "bun test src",
-    "theme:generate": "bun src/theme/writeThemeCss.ts"
+    "theme:generate": "bun src/theme/writeThemeCss.ts",
+    "storybook": "STORYBOOK_DISABLE_TELEMETRY=1 storybook dev -p 6006 --no-open",
+    "build-storybook": "STORYBOOK_DISABLE_TELEMETRY=1 storybook build"
   },
   "dependencies": {
     "@repo/tokens": "workspace:*",
@@ -30,11 +32,18 @@
   },
   "devDependencies": {
     "@repo/typescript-config": "workspace:*",
+    "@storybook/addon-a11y": "^10.6.7",
+    "@storybook/addon-docs": "^10.6.7",
+    "@storybook/react-vite": "^10.6.7",
+    "@tailwindcss/vite": "^4.1.13",
     "@types/bun": "^1.2.19",
     "@types/react": "^19.2.0",
     "@types/react-dom": "^19.2.0",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
-    "typescript": "5.9.3"
+    "storybook": "^10.6.7",
+    "tailwindcss": "^4.1.13",
+    "typescript": "5.9.3",
+    "vite": "^7.3.8"
   }
 }

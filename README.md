@@ -1,4 +1,4 @@
-# Template
+# monorepo-template-gql
 
 A Bun, Turbo, and Biome monorepo with one example feature: a note. The browser talks to GraphQL, and GraphQL talks to Postgres. Webhooks only answers a health check and an example route.
 
