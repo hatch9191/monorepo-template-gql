@@ -1,0 +1,21 @@
+{
+  "name": "@repo/logging",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "check-types": "tsc --noEmit",
+    "lint": "biome check src"
+  },
+  "dependencies": {
+    "pino": "^9.7.0"
+  },
+  "devDependencies": {
+    "@repo/typescript-config": "workspace:*",
+    "@types/bun": "^1.2.19",
+    "typescript": "5.9.3"
+  }
+}

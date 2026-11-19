@@ -1,0 +1,12 @@
+---
+description: Tokens, theme.css, and Tailwind
+alwaysApply: true
+---
+
+# Styling
+
+`@repo/tokens` owns colours, radius, and durations. It does not import React, CSS, or Tailwind.
+
+`@repo/ui` builds `theme.css` from those values, including the `@theme inline` colour mappings. Run `bun run theme:generate` after a token change. The unit test fails if the committed file drifts.
+
+Web components use shadcn and semantic classes such as `bg-background` and `text-muted-foreground`. Do not add Chakra or Emotion.

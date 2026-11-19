@@ -1,0 +1,23 @@
+{
+  "name": "webhooks",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "bun --watch src/server.ts",
+    "build": "tsc --noEmit",
+    "start": "bun src/server.ts",
+    "check-types": "tsc --noEmit",
+    "lint": "biome check src",
+    "test:unit": "bun test src"
+  },
+  "dependencies": {
+    "@repo/logging": "workspace:*",
+    "hono": "^4.9.8"
+  },
+  "devDependencies": {
+    "@repo/typescript-config": "workspace:*",
+    "@types/bun": "^1.2.19",
+    "typescript": "5.9.3"
+  }
+}

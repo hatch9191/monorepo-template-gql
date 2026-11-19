@@ -1,0 +1,10 @@
+---
+description: Branching and CI
+alwaysApply: true
+---
+
+# Git
+
+`main` is the only long-lived branch. Work happens on feature branches. CI runs on pull requests: unit tests, typecheck, lint, build, codegen drift, Playwright, and `docker compose build`. There is no deploy workflow.
+
+Commit messages follow Conventional Commits. The pre-commit hook formats staged files with Biome and restages them. The commit-msg hook runs commitlint.

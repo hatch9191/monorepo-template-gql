@@ -1,0 +1,14 @@
+---
+description: GraphQL schema, codegen, and integration tests
+alwaysApply: true
+---
+
+# API
+
+`apps/graphql/src/graphql/**/*.graphql` is the only declaration of a note. Server codegen writes `Resolvers` into `apps/graphql/src/generated/graphql.ts`. Client operations live in `packages/api/src/operations`, and `packages/api` codegen writes the hooks.
+
+Do not hand-write resolver argument types. Resolvers call modules. Modules take a `NotesStore`, not a Prisma client.
+
+Run `bun run codegen` after a schema change and commit the result. CI fails when codegen leaves a diff.
+
+Integration tests call `executeGraphqlRequest` with a fake store. Cover the list query and the blank-title error.

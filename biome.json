@@ -1,0 +1,162 @@
+{
+  "$schema": "https://biomejs.dev/schemas/2.6.8/schema.json",
+  "vcs": {
+    "enabled": true,
+    "clientKind": "git",
+    "useIgnoreFile": true
+  },
+  "files": {
+    "includes": [
+      "**",
+      "!**/node_modules",
+      "!**/.next",
+      "!**/dist",
+      "!**/coverage",
+      "!**/playwright-report",
+      "!**/test-results",
+      "!**/apps/graphql/src/generated",
+      "!**/packages/api/src/generated",
+      "!**/packages/db/src/generated",
+      "!**/packages/ui/src/theme/theme.css"
+    ]
+  },
+  "formatter": {
+    "enabled": true,
+    "indentStyle": "space",
+    "indentWidth": 2
+  },
+  "css": {
+    "parser": {
+      "tailwindDirectives": true
+    }
+  },
+  "linter": {
+    "enabled": true,
+    "rules": {
+      "preset": "recommended",
+      "style": {
+        "noRestrictedImports": {
+          "level": "error",
+          "options": {
+            "paths": {
+              "@emotion/react": "Emotion is not a dependency. Style with Tailwind.",
+              "@emotion/styled": "Emotion is not a dependency. Style with Tailwind."
+            }
+          }
+        }
+      }
+    }
+  },
+  "overrides": [
+    {
+      "includes": [
+        "packages/tokens/**",
+        "packages/domain/**",
+        "packages/types/**",
+        "packages/utils/**"
+      ],
+      "linter": {
+        "rules": {
+          "style": {
+            "noRestrictedGlobals": {
+              "level": "error",
+              "options": {
+                "deniedGlobals": {
+                  "window": "Shared packages must stay platform-agnostic.",
+                  "document": "Shared packages must stay platform-agnostic."
+                }
+              }
+            },
+            "noRestrictedImports": {
+              "level": "error",
+              "options": {
+                "paths": {
+                  "react": "This package must stay free of React.",
+                  "@emotion/react": "Emotion is not a dependency. Style with Tailwind.",
+                  "@emotion/styled": "Emotion is not a dependency. Style with Tailwind.",
+                  "@repo/db": "Shared packages must not depend on Prisma."
+                },
+                "patterns": [
+                  {
+                    "group": ["next", "next/**"],
+                    "message": "Shared packages must stay platform-agnostic."
+                  },
+                  {
+                    "group": ["react-dom", "react-dom/**"],
+                    "message": "Shared packages must stay platform-agnostic."
+                  },
+                  {
+                    "group": ["@chakra-ui/**"],
+                    "message": "Chakra is not a dependency. Style with Tailwind."
+                  },
+                  {
+                    "group": ["@emotion/**"],
+                    "message": "Emotion is not a dependency. Style with Tailwind."
+                  },
+                  {
+                    "group": ["@mui/**"],
+                    "message": "MUI is not a dependency."
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "includes": [
+        "packages/api/**",
+        "packages/platform/**",
+        "packages/data/**"
+      ],
+      "linter": {
+        "rules": {
+          "style": {
+            "noRestrictedGlobals": {
+              "level": "error",
+              "options": {
+                "deniedGlobals": {
+                  "window": "Shared packages must stay platform-agnostic.",
+                  "document": "Shared packages must stay platform-agnostic."
+                }
+              }
+            },
+            "noRestrictedImports": {
+              "level": "error",
+              "options": {
+                "paths": {
+                  "@emotion/react": "Emotion is not a dependency. Style with Tailwind.",
+                  "@emotion/styled": "Emotion is not a dependency. Style with Tailwind.",
+                  "@repo/db": "Shared packages must not depend on Prisma."
+                },
+                "patterns": [
+                  {
+                    "group": ["next", "next/**"],
+                    "message": "Shared packages must stay platform-agnostic."
+                  },
+                  {
+                    "group": ["react-dom", "react-dom/**"],
+                    "message": "Shared packages must stay platform-agnostic."
+                  },
+                  {
+                    "group": ["@chakra-ui/**"],
+                    "message": "Chakra is not a dependency. Style with Tailwind."
+                  },
+                  {
+                    "group": ["@emotion/**"],
+                    "message": "Emotion is not a dependency. Style with Tailwind."
+                  },
+                  {
+                    "group": ["@mui/**"],
+                    "message": "MUI is not a dependency."
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
+    }
+  ]
+}

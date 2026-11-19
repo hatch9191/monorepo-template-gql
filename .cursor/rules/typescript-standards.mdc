@@ -1,0 +1,16 @@
+---
+description: TypeScript placement, control flow, and tests
+alwaysApply: true
+---
+
+# TypeScript
+
+Generic helpers go in `@repo/utils`. Note rules go in `@repo/domain`. Generated GraphQL types stay generated.
+
+Use curly braces for every `if`, `for`, and `while` body.
+
+Use axios for HTTP. Do not use `fetch` in app code. The GraphQL and webhook servers may use the runtime's `Bun.serve`.
+
+Tests sit next to the function, import from `bun:test`, and use `describe(fn.name)`. Name the values `expected` and `result`. `test:unit` is `bun test src`. Playwright files are `*.e2e.ts` so `bun test` does not load them.
+
+TypeScript uses `moduleResolution: bundler`. Do not add `.ts` suffixes to imports.

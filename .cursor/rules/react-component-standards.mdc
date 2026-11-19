@@ -1,0 +1,16 @@
+---
+description: React components, Show, ListRenderer, and view models
+alwaysApply: true
+---
+
+# React
+
+Export named function components. Handlers inside a component are arrow functions.
+
+Use `Show` for optional UI and `ListRenderer` for lists. Pass `keyOverride`.
+
+Route strings live in `PATHS` under `apps/web-app/src/constants/paths.ts`.
+
+Page templates render. `useNotes` and later view-model hooks live in `@repo/data`.
+
+shadcn components live in `@repo/ui`. Add them with the shadcn CLI from `apps/web-app` so the `ui` alias writes into the package. If a file lands in the app, move it.

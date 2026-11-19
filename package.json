@@ -1,0 +1,41 @@
+{
+  "name": "template",
+  "private": true,
+  "scripts": {
+    "build": "turbo run build",
+    "dev": "turbo run dev",
+    "lint": "biome check .",
+    "lint-fix": "biome check --write .",
+    "test:unit": "turbo run test:unit",
+    "test:e2e": "bun run --filter web-app test:e2e",
+    "db:generate": "turbo run db:generate",
+    "db:migrate": "turbo run db:migrate",
+    "db:deploy": "turbo run db:deploy",
+    "check-types": "turbo run check-types",
+    "codegen": "turbo run codegen",
+    "theme:generate": "turbo run theme:generate --filter=@repo/ui",
+    "prepare": "husky"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^2.3.7",
+    "@commitlint/cli": "^19.8.1",
+    "@commitlint/config-conventional": "^19.8.1",
+    "husky": "^9.1.7",
+    "turbo": "^2.5.8",
+    "typescript": "5.9.3"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "packageManager": "bun@1.4.5",
+  "devEngines": {
+    "packageManager": {
+      "name": "bun",
+      "version": "1.4.5"
+    }
+  },
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ]
+}

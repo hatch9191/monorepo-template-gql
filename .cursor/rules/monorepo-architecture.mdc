@@ -1,0 +1,31 @@
+---
+description: Where code lives in this template monorepo
+alwaysApply: true
+---
+
+# Monorepo architecture
+
+Shared packages stay free of Next, the DOM, and Prisma. Apps wire those in.
+
+## Apps
+
+- `apps/web-app` — Next.js screen. Talks to GraphQL from the browser.
+- `apps/graphql` — GraphQL Yoga. The only app that writes notes.
+- `apps/webhooks` — Hono. Health and the example webhook. It does not import `@repo/db`.
+
+## Packages
+
+- `@repo/tokens` — colour, radius, and duration values. No CSS and no React.
+- `@repo/ui` — web components and `theme.css`, built from `@repo/tokens`.
+- `@repo/utils` — generic string, date, and number helpers.
+- `@repo/domain` — business rules. `normaliseNoteTitle` lives here.
+- `@repo/types` — cross-app types that are not generated from GraphQL.
+- `@repo/platform` — adapter interfaces and `usePlatform`. Web implements them.
+- `@repo/api` — GraphQL operations, the fetcher, and generated hooks.
+- `@repo/data` — view-model hooks. Pages do not call React Query themselves.
+- `@repo/db` — Prisma. GraphQL is the only app that imports it.
+- `@repo/logging` — pino, no worker transport. The web app does not import it.
+
+## Adding something later
+
+Payments, email, analytics, and task queues become their own packages when a product needs them. Do not put them in `@repo/domain`. A native UI package should import `@repo/tokens` and ignore `theme.css`.

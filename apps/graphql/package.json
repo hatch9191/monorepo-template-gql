@@ -1,0 +1,29 @@
+{
+  "name": "graphql-server",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "bun --env-file=../../packages/db/.env --watch src/server.ts",
+    "build": "tsc --noEmit",
+    "check-types": "tsc --noEmit",
+    "lint": "biome check src",
+    "test:unit": "bun test src",
+    "codegen": "graphql-codegen --config codegen.ts"
+  },
+  "dependencies": {
+    "@repo/db": "workspace:*",
+    "@repo/domain": "workspace:*",
+    "@repo/logging": "workspace:*",
+    "graphql": "^16.11.0",
+    "graphql-yoga": "^5.16.0"
+  },
+  "devDependencies": {
+    "@graphql-codegen/cli": "^5.0.7",
+    "@graphql-codegen/typescript": "^4.1.6",
+    "@graphql-codegen/typescript-resolvers": "^4.5.1",
+    "@repo/typescript-config": "workspace:*",
+    "@types/bun": "^1.2.19",
+    "typescript": "5.9.3"
+  }
+}

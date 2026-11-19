@@ -1,0 +1,48 @@
+{
+  "$schema": "https://turbo.build/schema.json",
+  "tasks": {
+    "build": {
+      "dependsOn": ["^db:generate", "^build"],
+      "outputs": [".next/**", "!.next/cache/**"]
+    },
+    "check-types": {
+      "dependsOn": ["^db:generate", "^check-types"]
+    },
+    "test:unit": {
+      "dependsOn": ["^db:generate"],
+      "outputs": []
+    },
+    "test:e2e": {
+      "cache": false,
+      "env": ["NEXT_PUBLIC_GRAPHQL_API_BASE_URI"]
+    },
+    "dev": {
+      "dependsOn": ["^db:generate"],
+      "cache": false,
+      "persistent": true,
+      "env": ["POSTGRES_DB_URL", "WEB_APP_ORIGIN", "PORT", "WEBHOOK_SECRET"]
+    },
+    "db:generate": {
+      "cache": false,
+      "env": ["POSTGRES_DB_URL"]
+    },
+    "db:migrate": {
+      "cache": false,
+      "persistent": true,
+      "env": ["POSTGRES_DB_URL"]
+    },
+    "db:deploy": {
+      "cache": false,
+      "env": ["POSTGRES_DB_URL"]
+    },
+    "codegen": {
+      "cache": false,
+      "outputs": ["src/generated/**"]
+    },
+    "theme:generate": {
+      "cache": false,
+      "outputs": ["src/theme/theme.css"]
+    },
+    "//#lint": {}
+  }
+}
