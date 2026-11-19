@@ -1,5 +1,4 @@
 import type { Note } from "../../generated/graphql";
-
 import type { NoteRecord } from "./notesStore";
 
 export function toNote(record: NoteRecord): Note {

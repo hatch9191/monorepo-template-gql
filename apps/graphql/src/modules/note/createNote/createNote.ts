@@ -2,7 +2,6 @@ import { normaliseNoteTitle } from "@repo/domain";
 import { GraphQLError } from "graphql";
 
 import type { Note } from "../../../generated/graphql";
-
 import type { NotesStore } from "../notesStore";
 import { toNote } from "../toNote";
 

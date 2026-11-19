@@ -1,5 +1,4 @@
 import { createHash, timingSafeEqual } from "node:crypto";
-
 import { Hono } from "hono";
 
 export const app = new Hono();

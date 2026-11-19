@@ -1,5 +1,4 @@
 import type { Resolvers } from "../generated/graphql";
-
 import { createNote } from "../modules/note/createNote/createNote";
 import { listNotes } from "../modules/note/listNotes/listNotes";
 
