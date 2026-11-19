@@ -20,7 +20,13 @@
       "dependsOn": ["^db:generate"],
       "cache": false,
       "persistent": true,
-      "env": ["POSTGRES_DB_URL", "WEB_APP_ORIGIN", "PORT", "WEBHOOK_SECRET"]
+      "env": [
+        "POSTGRES_DB_URL",
+        "WEB_APP_ORIGIN",
+        "PORT",
+        "WEBHOOK_SECRET",
+        "GRAPHQL_API_INTERNAL_URI"
+      ]
     },
     "db:generate": {
       "cache": false,

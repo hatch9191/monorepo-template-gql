@@ -46,5 +46,8 @@ services:
     environment:
       HOSTNAME: 0.0.0.0
       PORT: "3100"
+      GRAPHQL_API_INTERNAL_URI: http://graphql:4100/graphql
     ports:
       - "3100:3100"
+    depends_on:
+      - graphql
